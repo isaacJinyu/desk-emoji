@@ -28,7 +28,7 @@ audio_buffer = np.zeros((0,), dtype=np.float32)
 silence_duration = 0.0
 is_capturing = False
 print("Initialization done.")
-print("Waiting to detect sound...")
+print("Listening...")
 
 
 def get_completion(model="gpt-3.5-turbo", temperature=0, history_messages=[], prompt=''):
@@ -41,7 +41,8 @@ Your age is 1.
 Your skin is black.
 Your eyes are blue.
 You have no hands and legs, stick on the desk.
-Response in short and humor, without emoji.
+I am your master.
+Responses in short, with humorous, without emoji.
 """
     messages = [{"role": "system", "content": rule_text}]
     for message in history_messages:
