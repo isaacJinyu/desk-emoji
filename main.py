@@ -19,7 +19,9 @@ def callback(indata, frames, time, status):
             audio_buffer = np.zeros((0,), dtype=np.float32)
             print("Detected language '%s' with probability %f" % (info.language, info.language_probability))
             for segment in segments:
-                print(f"You: {segment.text}")
+                question = segment.text.strip()
+                if not question: continue
+                print(f"You: {question}")
                 answer = get_completion(segment.text, temperature=1)
                 print(f"Bot: {answer}\n")
                 speak_text(answer)
@@ -32,9 +34,10 @@ def callback(indata, frames, time, status):
         is_capturing = True
 
 
-with sd.InputStream(callback=callback, channels=1, samplerate=samplerate, dtype=np.float32):
-    try:
-        while True:
-            sd.sleep(1000)
-    except KeyboardInterrupt:
-        print("Stopped.")
+if __name__ == '__main__':
+    with sd.InputStream(callback=callback, channels=1, samplerate=samplerate, dtype=np.float32):
+        try:
+            while True:
+                sd.sleep(1000)
+        except KeyboardInterrupt:
+            print("Stopped.")
