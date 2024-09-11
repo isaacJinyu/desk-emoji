@@ -19,7 +19,7 @@ def callback(indata, frames, time, status):
             audio_buffer = np.zeros((0,), dtype=np.float32)
             print("Detected language '%s' with probability %f" % (info.language, info.language_probability))
             for segment in segments:
-                print("[%.2fs -> %.2fs] %s" % (segment.start, segment.end, segment.text))
+                print(f"You: {segment.text}")
                 answer = get_completion(segment.text, temperature=1)
                 print(f"Bot: {answer}\n")
                 speak_text(answer)

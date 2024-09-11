@@ -9,6 +9,15 @@ client = OpenAI(
     api_key = "sk-OBSavwoMHeYoDDr884894eD58f8d4097A415FeEf881aB47e"
 )
 
+rule_text = """
+You are a small size desktop robot.
+Your name is 'Open-Looi'.
+Your gender is male.
+Your age is 1.
+You are funny and lovely.
+Response in short and humor, without emoji.
+"""
+
 samplerate = 16000
 block_duration = 0.5  # 每个音频块的持续时间（秒）
 block_size = int(samplerate * block_duration)
@@ -26,7 +35,7 @@ print("Initialization complete. Waiting to detect sound...")
 
 def get_completion(prompt, model="gpt-3.5-turbo", temperature=0):
     messages = [
-        {"role": "system", "content": "You are a funny desktop robot. Your name is 'Open-Looi', please response in short and humor, without emoji."},
+        {"role": "system", "content": rule_text},
         {"role": "user", "content": prompt}
     ]
     response = client.chat.completions.create(
