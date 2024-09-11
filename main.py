@@ -15,16 +15,12 @@ def callback(indata, frames, time, status):
         if silence_duration >= silence_duration_threshold and is_capturing:
             is_capturing = False
             print("Silence detected. Capture stopped.")
-            segments, info = model.transcribe(audio_buffer, beam_size=5, language='en')
+            segments, info = model.transcribe(audio_buffer, beam_size=5, language=language)
             audio_buffer = np.zeros((0,), dtype=np.float32)
             print("Detected language '%s' with probability %f" % (info.language, info.language_probability))
             for segment in segments:
                 question = segment.text.strip()
-                if not question: continue
-                print(f"You: {question}")
-                answer = get_completion(segment.text, temperature=1)
-                print(f"Bot: {answer}\n")
-                speak_text(answer)
+                chat(question)
                 break
 
     else:
