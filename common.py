@@ -6,8 +6,8 @@ from langchain.memory import ConversationBufferMemory
 
 
 client = OpenAI(
-    base_url = "https://www.apigptopen.xyz/v1",
-    api_key = "sk-OBSavwoMHeYoDDr884894eD58f8d4097A415FeEf881aB47e"
+    base_url = "",
+    api_key = ""
 )
 
 language = 'en'
